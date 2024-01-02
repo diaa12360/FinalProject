@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-4dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="273dp"
+            android:layout_height="315dp"
+            android:contentDescription="@string/image_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/logo"
+            tools:ignore="VisualLintBounds" />
+
+        <TextView
+            android:id="@+id/userId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="336dp"
+            android:layout_marginBottom="332dp"
+            android:text="@string/user_id"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/messageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="288dp"
+            android:layout_marginBottom="228dp"
+            android:text="@string/messageTitle"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/messageBody"
+            android:layout_width="108dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="280dp"
+            android:layout_marginBottom="172dp"
+            android:text="@string/messageBody"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="332dp"
+            android:layout_marginBottom="292dp"
+            android:text="@string/gender"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/userIdText"
+            android:layout_width="284dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="324dp"
+            android:autofillHints="Enter your Id"
+            android:ems="10"
+            android:hint="@string/enter_your_id"
+            android:inputType="text"
+            android:textColorHint="#8D6E63"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/messageTitleText"
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="220dp"
+            android:autofillHints="Enter your Id"
+            android:ems="10"
+            android:hint="@string/messageTitleText"
+            android:inputType="text"
+            android:textColorHint="#8D6E63"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/messageBodyText"
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="160dp"
+            android:autofillHints="Enter your Id"
+            android:ems="10"
+            android:hint="@string/messageBodyText"
+            android:inputType="text"
+            android:textColorHint="#8D6E63"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="332dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="104dp"
+            android:layout_marginBottom="272dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/maleRadioButton"
+                android:layout_width="3dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/femaleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/female" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/spBtn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="162dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="224dp"
+            android:layout_marginBottom="68dp"
+            android:backgroundTint="#FFC107"
+            android:text="@string/spButtonText"
+            android:textStyle="bold"
+            android:onClick="spBtnOnClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/sqliteBtn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="210dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="68dp"
+            android:onClick="sqliteBtnOnClick"
+            android:backgroundTint="#FF9800"
+            android:text="@string/sqliteButtonText"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

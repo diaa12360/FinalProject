@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Final Project</string>
+    <string name="user_id">User Id</string>
+    <string name="image_content">Image Content</string>
+    <string name="gender">Gender</string>
+    <string name="enter_your_id">Enter your Id</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="messageTitle">Message Title</string>
+    <string name="messageTitleText">Enter your message title</string>
+    <string name="messageBody">Message Body</string>
+    <string name="messageBodyText">Enter your message body</string>
+    <string name="spButtonText">SAVE | LIST (SP)</string>
+    <string name="sqliteButtonText">SAVE | LIST (SQLITE)</string>
+</resources>
