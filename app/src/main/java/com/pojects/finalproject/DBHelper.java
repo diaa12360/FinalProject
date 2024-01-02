@@ -5,12 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.NoCopySpan;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class DbContext extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String Database_Name = "ChatApp.db";
@@ -22,7 +20,7 @@ public class DbContext extends SQLiteOpenHelper {
     private static final String Column_Gender = "user_gender";
     private static  String STATUS = "Success";
 
-    public DbContext(@Nullable Context context){
+    public DBHelper(@Nullable Context context){
         super(context, Database_Name, null, Database_Version);
         this.context = context;
     }
@@ -60,7 +58,7 @@ public class DbContext extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllData(){
+    public Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -68,12 +66,6 @@ public class DbContext extends SQLiteOpenHelper {
             return db.rawQuery(query, null);
         }
         return null;
-    }
-
-    public void deleteAllRecords(){
-        String query = "DELETE FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL(query);
     }
 
     public String getStatus(){ return STATUS; }

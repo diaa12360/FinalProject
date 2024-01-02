@@ -2,7 +2,6 @@ package com.pojects.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.*;
 import android.os.Bundle;
@@ -10,15 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import java.io.Console;
-
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
-    private static final String myPreference = "myPreference";
+    private SharedPreferences sharedPreferences;
+    private static final String myPreference = "app_prefs";
     private static final String userId = "UserId";
     private static final String messageBody = "MessageBody";
-    private static String userIdText, messageBodyText;
+    private static String userIdString, messageBodyString;
+    private EditText userIdText;
+    private EditText messageBodyText;
+    private EditText messageTitleText;
+    private RadioButton male;
+    private RadioButton female;
+    private ImageView img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,77 +31,60 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(myPreference,
                 Context.MODE_PRIVATE);
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> changeImage());
+        userIdText = findViewById(R.id.userIdText);
+        messageBodyText = findViewById(R.id.messageBodyText);
+        messageTitleText = findViewById(R.id.messageTitleText);
+        male = findViewById(R.id.maleRadioButton);
+        female = findViewById(R.id.femaleRadioButton);
+        img = findViewById(R.id.imageView);
+        radioGroup.setOnCheckedChangeListener((group, checkedId) ->
+                img.setImageResource(
+                        male.isChecked() ? R.drawable.baseline_male_24 : female.isChecked() ?
+                                R.drawable.baseline_female_24 : null
+                )
+        );
     }
 
-    public void sqliteBtnOnClick(View v){
-        EditText userIdText = findViewById(R.id.userIdText);
-        EditText messageBodyText = findViewById(R.id.messageBodyText);
-        EditText messageTitleText= findViewById(R.id.messageTitleText);
-        RadioButton male = findViewById(R.id.maleRadioButton);
-        RadioButton female = findViewById(R.id.femaleRadioButton);
-
+    public void sqliteBtnOnClick(View v) {
         String gender = "";
-
-        if(male.isChecked()){
+        if (male.isChecked()) {
             gender = "Male";
-        }else {
-            if(female.isChecked()){
-                gender = "Female";
-            }
+        } else if (female.isChecked()) {
+            gender = "Female";
         }
-
         try {
-            DbContext db = new DbContext(MainActivity.this);
-            db.addMessage(userIdText.getText().toString(), gender, messageTitleText.getText().toString(), messageBodyText.getText().toString());
-        }catch (Exception ex){
+            DBHelper db = new DBHelper(MainActivity.this);
+            db.addMessage(
+                    userIdText.getText().toString(),
+                    gender,
+                    messageTitleText.getText().toString(),
+                    messageBodyText.getText().toString()
+            );
+        } catch (Exception ex) {
             Log.d("Database exception", ex.toString());
         }
-
         Intent nextPage = new Intent(this, ItemListActivity.class);
         startActivity(nextPage);
     }
-    public void spBtnOnClick(View v){
-        save(v);
-        get(v);
-        new AlertDialog.Builder(this)
-                .setTitle("Review Message")
-                .setMessage("User ID: " + userIdText + "\nMessage: " + messageBodyText)
-                .setNegativeButton(android.R.string.ok, null)
-                .show();
-    }
 
-    public void changeImage() {
-        RadioButton male = findViewById(R.id.maleRadioButton);
-        RadioButton female = findViewById(R.id.femaleRadioButton);
-        ImageView img= (ImageView) findViewById(R.id.imageView);
-
-        if(male.isChecked()){
-            img.setImageResource(R.drawable.male);
-        }else {
-            if(female.isChecked()){
-                img.setImageResource(R.drawable.female);
-            }
-        }
-    }
-
-    public void save(View v){
-        EditText userIdText = findViewById(R.id.userIdText);
-        EditText messageBodyText = findViewById(R.id.messageBodyText);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(userId, userIdText.getText().toString());
-        editor.putString(messageBody, messageBodyText.getText().toString());
-        editor.apply();
-    }
-
-    public void get(View v){
-        sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE);
-
+    public void spBtnOnClick(View v) {
+        //Save in app_prefs
+        sharedPreferences.edit()
+                .putString(userId, userIdText.getText().toString())
+                .putString(messageBody, messageBodyText.getText().toString())
+                .apply();
+        //Get from app_prefs
         if (sharedPreferences.contains(userId)) {
-            userIdText = sharedPreferences.getString(userId, "");
+            userIdString = sharedPreferences.getString(userId, "");
         }
         if (sharedPreferences.contains(messageBody)) {
-            messageBodyText = sharedPreferences.getString(messageBody, "");
+            messageBodyString = sharedPreferences.getString(messageBody, "");
         }
+        //show in AlertDialog
+        new AlertDialog.Builder(this)
+                .setTitle("Review Message")
+                .setMessage("User ID: " + userIdString + "\nMessage: " + messageBodyString)
+                .setNegativeButton(android.R.string.ok, null)
+                .show();
     }
 }
